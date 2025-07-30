@@ -1,5 +1,6 @@
 package com.example.pedidos.service;
 
+import com.example.pedidos.dto.AtualizarPedidoDTO;
 import com.example.pedidos.dto.CadastrarPedidoDTO;
 import com.example.pedidos.dto.DetalhePedidoDTO;
 import com.example.pedidos.dto.ProdutosPedidoDTO;
@@ -13,6 +14,8 @@ import com.example.pedidos.repository.ProdutoRepository;
 import com.example.pedidos.repository.ProdutosPedidoRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -65,5 +68,51 @@ public class PedidoService {
 
         return new DetalhePedidoDTO(pedido, cliente, produtosPedidos);
 
+    }
+
+    public Page<DetalhePedidoDTO> buscarTodos(Pageable pageable) {
+
+        Page<Pedido> pedidos = pedidoRepository.findAll(pageable);
+
+        return pedidos.map(pedido -> new DetalhePedidoDTO(pedido, pedido.getCliente(), pedido.getProdutosPedido()));
+    }
+
+    public DetalhePedidoDTO buscarPorId(Long id) {
+
+        Pedido pedido = this.buscar(id);
+
+        return new DetalhePedidoDTO(pedido, pedido.getCliente(), pedido.getProdutosPedido());
+    }
+
+    public void pagar(Long id) {
+
+        Pedido pedido = this.buscar(id);
+        pedido.pagar();
+    }
+
+    public void entregar(Long id) {
+
+        Pedido pedido = this.buscar(id);
+        pedido.entregar();
+    }
+
+
+    public DetalhePedidoDTO atualizar(Long id, AtualizarPedidoDTO atualizarPedidoDTO) {
+
+        Pedido pedido = this.buscar(id);
+        pedido.atualizar(atualizarPedidoDTO);
+
+        return new DetalhePedidoDTO(pedido, pedido.getCliente(), pedido.getProdutosPedido());
+    }
+
+    public void cancelar(Long id) {
+
+        Pedido pedido = this.buscar(id);
+        pedido.cancelar();
+    }
+
+    private Pedido buscar(Long id) {
+        return pedidoRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Pedido não encontrado"));
     }
 }

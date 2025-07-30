@@ -6,11 +6,13 @@ import com.example.pedidos.entity.ProdutosPedido;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public record DetalhePedidoDTO(
         Long id,
-        List<ProdutosPedido> produtosPedido,
-        Cliente cliente,
+        List<DetalheProdutoDTO> produtosPedido,
+        String nomeCliente,
+        String observacaoCliente,
         String observacao,
         LocalDateTime dataEntrega,
         LocalDateTime dataCriacao,
@@ -19,6 +21,13 @@ public record DetalhePedidoDTO(
 ) {
 
     public DetalhePedidoDTO(Pedido pedido, Cliente cliente, List<ProdutosPedido> produtosPedido){
-        this(pedido.getId(), produtosPedido, cliente, pedido.getObservacao(), pedido.getDataEntrega(), pedido.getDataCriacao(), pedido.getPago(), pedido.getEntregue());
+        this(pedido.getId(),
+                produtosPedido.stream().map(
+                        prod -> new DetalheProdutoDTO(
+                                prod.getProduto().getId(),
+                                prod.getProduto().getNome(),
+                                prod.getProduto().getValorSugerido(),
+                                prod.getProduto().getQuantidade()))
+                        .collect(Collectors.toList()), cliente.getNome(), cliente.getObservacao(), pedido.getObservacao(), pedido.getDataEntrega(), pedido.getDataCriacao(), pedido.getPago(), pedido.getEntregue());
     }
 }

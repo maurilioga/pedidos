@@ -11,8 +11,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 public class ClienteService {
 
@@ -36,26 +34,20 @@ public class ClienteService {
 
     public DetalheClienteDTO buscarPorId(Long id) {
 
-        Optional<Cliente> cliente = clienteRepository.findById(id);
+        Cliente cliente = clienteRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Cliente não encontrado"));
 
-        if(cliente.isEmpty()) {
-            throw new EntityNotFoundException();
-        }
-
-        return new DetalheClienteDTO(cliente.get());
+        return new DetalheClienteDTO(cliente);
     }
 
     public DetalheClienteDTO atualizar(Long id, AtualizarClienteDTO atualizarClienteDTO) {
 
-        Optional<Cliente> cliente = clienteRepository.findById(id);
+        Cliente cliente = clienteRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Cliente não encontrado"));
 
-        if(cliente.isEmpty()) {
-            throw new EntityNotFoundException();
-        }
+        cliente.atualizar(atualizarClienteDTO);
 
-        cliente.get().atualizar(atualizarClienteDTO);
-
-        return new DetalheClienteDTO(cliente.get());
+        return new DetalheClienteDTO(cliente);
 
     }
 }

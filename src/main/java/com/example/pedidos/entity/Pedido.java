@@ -1,5 +1,6 @@
 package com.example.pedidos.entity;
 
+import com.example.pedidos.dto.AtualizarPedidoDTO;
 import com.example.pedidos.dto.CadastrarPedidoDTO;
 import jakarta.persistence.*;
 import lombok.*;
@@ -34,6 +35,8 @@ public class Pedido {
 
     private Boolean entregue;
 
+    private Boolean cancelado;
+
     @ManyToOne
     private Cliente cliente;
 
@@ -41,13 +44,36 @@ public class Pedido {
     private List<ProdutosPedido> produtosPedido;
 
     public Pedido(CadastrarPedidoDTO cadastrarPedidoDTO, Cliente cliente, BigDecimal valorTotal, List<ProdutosPedido> produtosPedidos) {
-        this.cliente = cliente;
         this.dataCriacao = LocalDateTime.now();
         this.dataEntrega = cadastrarPedidoDTO.dataEntrega();
         this.observacao = cadastrarPedidoDTO.observacao();
         this.valorTotal = valorTotal.setScale(2, RoundingMode.HALF_UP);
-        this.produtosPedido = produtosPedidos;
         this.pago = false;
         this.entregue = false;
+        this.cancelado = false;
+        this.cliente = cliente;
+        this.produtosPedido = produtosPedidos;
+    }
+
+    public void pagar() {
+        this.pago = true;
+    }
+
+    public void entregar() {
+        this.entregue = true;
+    }
+
+    public void atualizar(AtualizarPedidoDTO atualizarPedidoDTO) {
+        if (atualizarPedidoDTO.observacao() != null) {
+            this.observacao = atualizarPedidoDTO.observacao();
+        }
+
+        if(atualizarPedidoDTO.dataEntrega() != null) {
+            this.dataEntrega = atualizarPedidoDTO.dataEntrega();
+        }
+    }
+
+    public void cancelar() {
+        this.cancelado = true;
     }
 }
