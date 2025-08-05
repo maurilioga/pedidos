@@ -32,7 +32,7 @@ public class ProdutoController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<DetalheProdutoDTO>> buscarTodos(@PageableDefault(size = 5) Pageable pageable) {
+    public ResponseEntity<Page<DetalheProdutoDTO>> buscarTodos(Pageable pageable) {
 
         Page<DetalheProdutoDTO> detalheProdutoDTO = produtoService.buscarTodos(pageable);
 

@@ -37,7 +37,7 @@ public class ClienteController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<DetalheClienteDTO>> buscar(@PageableDefault(size = 5) Pageable pageable) {
+    public ResponseEntity<Page<DetalheClienteDTO>> buscar(Pageable pageable) {
 
         Page<DetalheClienteDTO> detalheClienteDTO = clienteService.buscarTodos(pageable);
 
