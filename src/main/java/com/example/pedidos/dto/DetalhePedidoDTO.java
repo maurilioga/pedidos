@@ -27,7 +27,7 @@ public record DetalhePedidoDTO(
                                 prod.getProduto().getId(),
                                 prod.getProduto().getNome(),
                                 prod.getProduto().getValorSugerido(),
-                                prod.getProduto().getQuantidade()))
+                                prod.getQuantidade()))
                         .collect(Collectors.toList()), cliente.getNome(), cliente.getObservacao(), pedido.getObservacao(), pedido.getDataEntrega(), pedido.getDataCriacao(), pedido.getPago(), pedido.getEntregue());
     }
 }
