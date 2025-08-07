@@ -1,13 +1,12 @@
 package com.example.pedidos.controller;
 
-import com.example.pedidos.dto.AtualizarProdutoDTO;
-import com.example.pedidos.dto.CadastrarProdutoDTO;
-import com.example.pedidos.dto.DetalheProdutoDTO;
+import com.example.pedidos.dto.produto.AtualizarProdutoDTO;
+import com.example.pedidos.dto.produto.CadastrarProdutoDTO;
+import com.example.pedidos.dto.produto.DetalheProdutoDTO;
 import com.example.pedidos.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;

@@ -1,5 +1,6 @@
-package com.example.pedidos.dto;
+package com.example.pedidos.dto.produtospedidos;
 
+import com.example.pedidos.dto.produto.DetalheProdutoDTO;
 import com.example.pedidos.entity.Pedido;
 import com.example.pedidos.entity.ProdutosPedido;
 

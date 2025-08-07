@@ -1,4 +1,4 @@
-package com.example.pedidos.dto;
+package com.example.pedidos.dto.produto;
 
 import com.example.pedidos.entity.Produto;
 

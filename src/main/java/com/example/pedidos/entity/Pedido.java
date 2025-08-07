@@ -1,7 +1,7 @@
 package com.example.pedidos.entity;
 
-import com.example.pedidos.dto.AtualizarPedidoDTO;
-import com.example.pedidos.dto.CadastrarPedidoDTO;
+import com.example.pedidos.dto.pedido.AtualizarPedidoDTO;
+import com.example.pedidos.dto.pedido.CadastrarPedidoDTO;
 import jakarta.persistence.*;
 import lombok.*;
 

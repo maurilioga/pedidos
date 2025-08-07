@@ -1,4 +1,4 @@
-package com.example.pedidos.dto;
+package com.example.pedidos.dto.produto;
 
 import java.math.BigDecimal;
 

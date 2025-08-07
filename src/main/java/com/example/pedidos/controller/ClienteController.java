@@ -1,19 +1,21 @@
 package com.example.pedidos.controller;
 
-import com.example.pedidos.dto.AtualizarClienteDTO;
-import com.example.pedidos.dto.CadastrarClienteDTO;
-import com.example.pedidos.dto.DetalheClienteDTO;
+import com.example.pedidos.dto.cliente.AtualizarClienteDTO;
+import com.example.pedidos.dto.cliente.CadastrarClienteDTO;
+import com.example.pedidos.dto.cliente.ClientePendenciasDTO;
+import com.example.pedidos.dto.cliente.DetalheClienteDTO;
 import com.example.pedidos.repository.ClienteRepository;
 import com.example.pedidos.service.ClienteService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/cliente")
@@ -59,6 +61,14 @@ public class ClienteController {
         DetalheClienteDTO detalheClienteDTO = clienteService.atualizar(id, atualizarClienteDTO);
 
         return ResponseEntity.ok(detalheClienteDTO);
+    }
+
+    @GetMapping("/pendencias")
+    public ResponseEntity<List<ClientePendenciasDTO>> buscarPendencias() {
+
+        List<ClientePendenciasDTO> clientePendenciasDTOList = clienteService.buscarPendencias();
+
+        return ResponseEntity.ok(clientePendenciasDTOList);
     }
 
 }

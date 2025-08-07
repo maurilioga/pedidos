@@ -1,4 +1,4 @@
-package com.example.pedidos.dto;
+package com.example.pedidos.dto.pedido;
 
 import java.time.LocalDateTime;
 

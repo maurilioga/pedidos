@@ -1,5 +1,6 @@
-package com.example.pedidos.dto;
+package com.example.pedidos.dto.pedido;
 
+import com.example.pedidos.dto.produtospedidos.ProdutosPedidoDTO;
 import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;

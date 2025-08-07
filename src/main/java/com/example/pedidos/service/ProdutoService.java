@@ -1,8 +1,8 @@
 package com.example.pedidos.service;
 
-import com.example.pedidos.dto.AtualizarProdutoDTO;
-import com.example.pedidos.dto.CadastrarProdutoDTO;
-import com.example.pedidos.dto.DetalheProdutoDTO;
+import com.example.pedidos.dto.produto.AtualizarProdutoDTO;
+import com.example.pedidos.dto.produto.CadastrarProdutoDTO;
+import com.example.pedidos.dto.produto.DetalheProdutoDTO;
 import com.example.pedidos.entity.Produto;
 import com.example.pedidos.repository.ProdutoRepository;
 import jakarta.persistence.EntityNotFoundException;

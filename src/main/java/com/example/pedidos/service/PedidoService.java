@@ -1,9 +1,9 @@
 package com.example.pedidos.service;
 
-import com.example.pedidos.dto.AtualizarPedidoDTO;
-import com.example.pedidos.dto.CadastrarPedidoDTO;
-import com.example.pedidos.dto.DetalhePedidoDTO;
-import com.example.pedidos.dto.ProdutosPedidoDTO;
+import com.example.pedidos.dto.pedido.AtualizarPedidoDTO;
+import com.example.pedidos.dto.pedido.CadastrarPedidoDTO;
+import com.example.pedidos.dto.pedido.DetalhePedidoDTO;
+import com.example.pedidos.dto.produtospedidos.ProdutosPedidoDTO;
 import com.example.pedidos.entity.Cliente;
 import com.example.pedidos.entity.Pedido;
 import com.example.pedidos.entity.Produto;

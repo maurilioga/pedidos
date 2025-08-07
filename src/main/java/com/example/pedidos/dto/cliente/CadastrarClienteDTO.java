@@ -1,4 +1,4 @@
-package com.example.pedidos.dto;
+package com.example.pedidos.dto.cliente;
 
 import jakarta.validation.constraints.NotBlank;
 

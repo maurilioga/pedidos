@@ -1,4 +1,4 @@
-package com.example.pedidos.dto;
+package com.example.pedidos.dto.produtospedidos;
 
 import jakarta.validation.constraints.NotNull;
 

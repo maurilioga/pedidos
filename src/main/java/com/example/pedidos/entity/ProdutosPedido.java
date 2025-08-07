@@ -1,6 +1,6 @@
 package com.example.pedidos.entity;
 
-import com.example.pedidos.dto.ProdutosPedidoDTO;
+import com.example.pedidos.dto.produtospedidos.ProdutosPedidoDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
