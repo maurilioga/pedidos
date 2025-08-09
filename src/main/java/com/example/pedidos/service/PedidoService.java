@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PedidoService {
@@ -114,5 +115,14 @@ public class PedidoService {
     private Pedido buscar(Long id) {
         return pedidoRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Pedido não encontrado"));
+    }
+
+    public List<DetalhePedidoDTO> buscarPendentes() {
+
+        List<Pedido> pedidos = pedidoRepository.findByEntregueFalseOrPagoFalseOrderByDataEntrega();
+
+        return pedidos.stream()
+                .map(pedido -> new DetalhePedidoDTO(pedido, pedido.getCliente(), pedido.getProdutosPedido()))
+                .toList();
     }
 }

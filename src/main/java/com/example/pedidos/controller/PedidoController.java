@@ -12,6 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/pedido")
 public class PedidoController {
@@ -81,5 +83,13 @@ public class PedidoController {
         pedidoService.cancelar(id);
 
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/pendentes")
+    public ResponseEntity<List<DetalhePedidoDTO>> buscarPendentes() {
+
+        List<DetalhePedidoDTO> detalhePedidoDTOList = pedidoService.buscarPendentes();
+
+        return ResponseEntity.ok(detalhePedidoDTOList);
     }
 }
