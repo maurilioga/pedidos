@@ -3,6 +3,7 @@ package com.example.pedidos.controller;
 import com.example.pedidos.dto.pedido.AtualizarPedidoDTO;
 import com.example.pedidos.dto.pedido.CadastrarPedidoDTO;
 import com.example.pedidos.dto.pedido.DetalhePedidoDTO;
+import com.example.pedidos.dto.pedido.PedidosPendentesDTO;
 import com.example.pedidos.service.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -91,5 +92,13 @@ public class PedidoController {
         List<DetalhePedidoDTO> detalhePedidoDTOList = pedidoService.buscarPendentes();
 
         return ResponseEntity.ok(detalhePedidoDTOList);
+    }
+
+    @GetMapping("/pendentes/contagem")
+    public ResponseEntity<PedidosPendentesDTO> buscarContagemPendentes() {
+
+        PedidosPendentesDTO pedidosPendentesDTO = pedidoService.buscarContagemPendentes();
+
+        return ResponseEntity.ok(pedidosPendentesDTO);
     }
 }

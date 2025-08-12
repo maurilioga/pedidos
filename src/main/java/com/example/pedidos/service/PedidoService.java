@@ -3,6 +3,7 @@ package com.example.pedidos.service;
 import com.example.pedidos.dto.pedido.AtualizarPedidoDTO;
 import com.example.pedidos.dto.pedido.CadastrarPedidoDTO;
 import com.example.pedidos.dto.pedido.DetalhePedidoDTO;
+import com.example.pedidos.dto.pedido.PedidosPendentesDTO;
 import com.example.pedidos.dto.produtospedidos.ProdutosPedidoDTO;
 import com.example.pedidos.entity.Cliente;
 import com.example.pedidos.entity.Pedido;
@@ -124,5 +125,10 @@ public class PedidoService {
         return pedidos.stream()
                 .map(pedido -> new DetalhePedidoDTO(pedido, pedido.getCliente(), pedido.getProdutosPedido()))
                 .toList();
+    }
+
+    public PedidosPendentesDTO buscarContagemPendentes() {
+
+        return pedidoRepository.buscarContagemPendentes();
     }
 }
