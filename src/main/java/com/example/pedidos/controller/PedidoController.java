@@ -3,7 +3,8 @@ package com.example.pedidos.controller;
 import com.example.pedidos.dto.pedido.AtualizarPedidoDTO;
 import com.example.pedidos.dto.pedido.CadastrarPedidoDTO;
 import com.example.pedidos.dto.pedido.DetalhePedidoDTO;
-import com.example.pedidos.dto.pedido.PedidosPendentesDTO;
+import com.example.pedidos.dto.pedido.ContagemPedidosPendentesDTO;
+import com.example.pedidos.dto.produtospedidos.DetalheProdutosPedidoDTO;
 import com.example.pedidos.service.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -87,18 +88,18 @@ public class PedidoController {
     }
 
     @GetMapping("/pendentes")
-    public ResponseEntity<List<DetalhePedidoDTO>> buscarPendentes() {
+    public ResponseEntity<List<DetalheProdutosPedidoDTO>> buscarPendentes() {
 
-        List<DetalhePedidoDTO> detalhePedidoDTOList = pedidoService.buscarPendentes();
+        List<DetalheProdutosPedidoDTO> detalheProdutosPedidoDTO = pedidoService.buscarPendentes();
 
-        return ResponseEntity.ok(detalhePedidoDTOList);
+        return ResponseEntity.ok(detalheProdutosPedidoDTO);
     }
 
     @GetMapping("/pendentes/contagem")
-    public ResponseEntity<PedidosPendentesDTO> buscarContagemPendentes() {
+    public ResponseEntity<ContagemPedidosPendentesDTO> buscarContagemPendentes() {
 
-        PedidosPendentesDTO pedidosPendentesDTO = pedidoService.buscarContagemPendentes();
+        ContagemPedidosPendentesDTO contagemPedidosPendentesDTO = pedidoService.buscarContagemPendentes();
 
-        return ResponseEntity.ok(pedidosPendentesDTO);
+        return ResponseEntity.ok(contagemPedidosPendentesDTO);
     }
 }

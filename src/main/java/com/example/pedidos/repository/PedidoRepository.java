@@ -1,7 +1,6 @@
 package com.example.pedidos.repository;
 
-import com.example.pedidos.dto.pedido.DetalhePedidoDTO;
-import com.example.pedidos.dto.pedido.PedidosPendentesDTO;
+import com.example.pedidos.dto.pedido.ContagemPedidosPendentesDTO;
 import com.example.pedidos.entity.Pedido;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -21,5 +20,5 @@ public interface PedidoRepository extends JpaRepository<Pedido, Long> {
             FROM TB_PEDIDOS
             WHERE ENTREGUE = FALSE OR PAGO = FALSE
             """, nativeQuery = true)
-    PedidosPendentesDTO buscarContagemPendentes();
+    ContagemPedidosPendentesDTO buscarContagemPendentes();
 }

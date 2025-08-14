@@ -5,6 +5,7 @@ import com.example.pedidos.entity.Cliente;
 import com.example.pedidos.entity.Pedido;
 import com.example.pedidos.entity.ProdutosPedido;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,7 +19,8 @@ public record DetalhePedidoDTO(
         LocalDateTime dataEntrega,
         LocalDateTime dataCriacao,
         Boolean pago,
-        Boolean entregue
+        Boolean entregue,
+        BigDecimal valorTotal
 ) {
 
     public DetalhePedidoDTO(Pedido pedido, Cliente cliente, List<ProdutosPedido> produtosPedido){
@@ -29,6 +31,15 @@ public record DetalhePedidoDTO(
                                 prod.getProduto().getNome(),
                                 prod.getProduto().getValorSugerido(),
                                 prod.getQuantidade()))
-                        .collect(Collectors.toList()), cliente.getNome(), cliente.getObservacao(), pedido.getObservacao(), pedido.getDataEntrega(), pedido.getDataCriacao(), pedido.getPago(), pedido.getEntregue());
+                        .collect(Collectors.toList()),
+                cliente.getNome(),
+                cliente.getObservacao(),
+                pedido.getObservacao(),
+                pedido.getDataEntrega(),
+                pedido.getDataCriacao(),
+                pedido.getPago(),
+                pedido.getEntregue(),
+                pedido.getValorTotal()
+        );
     }
 }

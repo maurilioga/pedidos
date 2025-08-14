@@ -1,6 +1,6 @@
 package com.example.pedidos.dto.pedido;
 
-public record PedidosPendentesDTO(
+public record ContagemPedidosPendentesDTO(
         Long pendenteEntrega,
         Long pendentePagamento
 ) {

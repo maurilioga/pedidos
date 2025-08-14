@@ -3,8 +3,9 @@ package com.example.pedidos.service;
 import com.example.pedidos.dto.pedido.AtualizarPedidoDTO;
 import com.example.pedidos.dto.pedido.CadastrarPedidoDTO;
 import com.example.pedidos.dto.pedido.DetalhePedidoDTO;
-import com.example.pedidos.dto.pedido.PedidosPendentesDTO;
-import com.example.pedidos.dto.produtospedidos.ProdutosPedidoDTO;
+import com.example.pedidos.dto.pedido.ContagemPedidosPendentesDTO;
+import com.example.pedidos.dto.produto.ProdutoDTO;
+import com.example.pedidos.dto.produtospedidos.DetalheProdutosPedidoDTO;
 import com.example.pedidos.entity.Cliente;
 import com.example.pedidos.entity.Pedido;
 import com.example.pedidos.entity.Produto;
@@ -22,7 +23,6 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class PedidoService {
@@ -47,7 +47,7 @@ public class PedidoService {
         Cliente cliente = clienteRepository.findById(cadastrarPedidoDTO.idCliente())
                 .orElseThrow(() -> new EntityNotFoundException("Cliente não encontrado"));
 
-        for (ProdutosPedidoDTO produtoDTO : cadastrarPedidoDTO.produtos()) {
+        for (ProdutoDTO produtoDTO : cadastrarPedidoDTO.produtos()) {
             Produto produto = produtoRepository.findByIdAndAtivoIsTrue(produtoDTO.idProduto());
 
             if(produto == null) {
@@ -118,16 +118,16 @@ public class PedidoService {
                 .orElseThrow(() -> new EntityNotFoundException("Pedido não encontrado"));
     }
 
-    public List<DetalhePedidoDTO> buscarPendentes() {
+    public List<DetalheProdutosPedidoDTO> buscarPendentes() {
 
         List<Pedido> pedidos = pedidoRepository.findByEntregueFalseOrPagoFalseOrderByDataEntrega();
 
         return pedidos.stream()
-                .map(pedido -> new DetalhePedidoDTO(pedido, pedido.getCliente(), pedido.getProdutosPedido()))
+                .map(pedido -> new DetalheProdutosPedidoDTO(pedido, pedido.getCliente(), pedido.getProdutosPedido()))
                 .toList();
     }
 
-    public PedidosPendentesDTO buscarContagemPendentes() {
+    public ContagemPedidosPendentesDTO buscarContagemPendentes() {
 
         return pedidoRepository.buscarContagemPendentes();
     }

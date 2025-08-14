@@ -1,25 +1,40 @@
 package com.example.pedidos.dto.produtospedidos;
 
-import com.example.pedidos.dto.produto.DetalheProdutoDTO;
+import com.example.pedidos.entity.Cliente;
 import com.example.pedidos.entity.Pedido;
 import com.example.pedidos.entity.ProdutosPedido;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public record DetalheProdutosPedidoDTO(
-        Long id,
-        List<DetalheProdutoDTO> produtosPedido
+        Long idPedido,
+        List<ProdutoPedidoDTO> produtosPedido,
+        String nomeCliente,
+        String observacaoCliente,
+        String observacao,
+        LocalDateTime dataEntrega,
+        LocalDateTime dataCriacao,
+        Boolean pago,
+        Boolean entregue,
+        BigDecimal valorTotal
 ) {
 
-    public DetalheProdutosPedidoDTO(Pedido pedido, List<ProdutosPedido> produtosPedido){
-        this(pedido.getId(),
-                produtosPedido.stream().map(
-                                prod -> new DetalheProdutoDTO(
-                                        prod.getProduto().getId(),
-                                        prod.getProduto().getNome(),
-                                        prod.getProduto().getValorSugerido(),
-                                        prod.getProduto().getQuantidade()))
-                        .collect(Collectors.toList()));
+    public DetalheProdutosPedidoDTO(Pedido pedido, Cliente cliente, List<ProdutosPedido> produtosPedido) {
+        this(
+                pedido.getId(),
+                produtosPedido.stream()
+                        .map(ProdutoPedidoDTO::new)
+                        .toList(),
+                cliente.getNome(),
+                cliente.getObservacao(),
+                pedido.getObservacao(),
+                pedido.getDataEntrega(),
+                pedido.getDataCriacao(),
+                pedido.getPago(),
+                pedido.getEntregue(),
+                pedido.getValorTotal()
+        );
     }
 }

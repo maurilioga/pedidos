@@ -1,6 +1,6 @@
 package com.example.pedidos.entity;
 
-import com.example.pedidos.dto.produtospedidos.ProdutosPedidoDTO;
+import com.example.pedidos.dto.produto.ProdutoDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -29,7 +29,7 @@ public class ProdutosPedido {
     @ManyToOne
     private Produto produto;
 
-    public ProdutosPedido(ProdutosPedidoDTO produtoDTO, Pedido pedido, Produto produto) {
+    public ProdutosPedido(ProdutoDTO produtoDTO, Pedido pedido, Produto produto) {
         this.pedido = pedido;
         this.produto = produto;
         this.quantidade = produtoDTO.quantidade();
