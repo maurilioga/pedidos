@@ -1,6 +1,7 @@
 package com.example.pedidos.dto.pedido;
 
 import com.example.pedidos.dto.produto.DetalheProdutoDTO;
+import com.example.pedidos.dto.produtospedidos.ProdutoPedidoDTO;
 import com.example.pedidos.entity.Cliente;
 import com.example.pedidos.entity.Pedido;
 import com.example.pedidos.entity.ProdutosPedido;
@@ -12,7 +13,7 @@ import java.util.stream.Collectors;
 
 public record DetalhePedidoDTO(
         Long id,
-        List<DetalheProdutoDTO> produtosPedido,
+        List<ProdutoPedidoDTO> produtosPedido,
         String nomeCliente,
         String observacaoCliente,
         String observacao,
@@ -26,11 +27,7 @@ public record DetalhePedidoDTO(
     public DetalhePedidoDTO(Pedido pedido, Cliente cliente, List<ProdutosPedido> produtosPedido){
         this(pedido.getId(),
                 produtosPedido.stream().map(
-                        prod -> new DetalheProdutoDTO(
-                                prod.getProduto().getId(),
-                                prod.getProduto().getNome(),
-                                prod.getProduto().getValorSugerido(),
-                                prod.getQuantidade()))
+                        ProdutoPedidoDTO::new)
                         .collect(Collectors.toList()),
                 cliente.getNome(),
                 cliente.getObservacao(),
